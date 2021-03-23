@@ -39,7 +39,6 @@ app.get('/:id', (req, res) => {
       return axios.get(`${services.details}${req.params.id}`, {params: {proxy: true}})
         .then((result) => {
           const detailsBundle = result.data;
-          console.log(detailsBundle);
           fs.writeFile(path.resolve(__dirname + '/../public/dist/detailsBundle.js'), detailsBundle, (error) => {
             if (error) {
               throw(error);
@@ -54,7 +53,6 @@ app.get('/:id', (req, res) => {
       return axios.get(`${services.related}${req.params.id}`, {params: {proxy: true}})
         .then((result) => {
           const relatedBundle = result.data;
-          console.log(relatedBundle);
           fs.writeFile(path.resolve(__dirname + '/../public/dist/relatedBundle.js'), relatedBundle, (error) => {
             if (error) {
               throw(error);
@@ -122,9 +120,10 @@ app.get('/related-products/:id', (req, res) => {
       res.status(200).send(response);
     })
     .catch((error) => {
-      console.log('PROXY GET /details/:id', error);
+      console.log('PROXY GET /related-products/:id', error);
     });
 });
+
 app.listen(port, () => {
   console.log( `Listening To Port:${port}`);
 });
